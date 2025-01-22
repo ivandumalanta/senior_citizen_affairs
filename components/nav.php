@@ -1,10 +1,21 @@
-<div class="container">
-            <a href="#" class="logo">Senior citizen affairs</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Benefits</a></li>
-                <li><a href="#services">Activity</a></li>
-                <li><a href="#contact">Analytics</a></li>
-                <li><a href="#contact">Register</a></li>
-            </ul>
+<div class="container-fluid">
+    <div class="row nav-body">
+        <div class="col-sm-8 nav-header">
+            <img src="https://www.oscaportal.com/logo/logo.png" alt="Office of Senior Citizen Affairs Malasiqui" title="Office of Senior Citizen Affairs Malasiqui" class="nav-logo">         
+            <a class="navbar-brand" href="index.php">Office of Senior Citizen Affairs <br>Malasiqui</a>
+        </div>
+        <div class="col-sm-4 nav-header">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+    </div>
+</div>
+
+<div class="navmenu">
+    <ul class="nav navbar-nav">
+        <li><a href="index.php">Home</a></li>
+        <li><a href="#">Benefits</a></li>
+        <li><a href="#">Activities</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="register.php">Register</a></li>
+    </ul>
 </div>
