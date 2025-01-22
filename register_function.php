@@ -12,8 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $birth_month = $_POST['birth_month'] ?? '';
     $birth_day = $_POST['birth_day'] ?? '';
     $birth_year = $_POST['birth_year'] ?? '';
-
-    // Convert month to numerical format (January => 01, February => 02, etc.)
+ 
     $month_map = [
         "January" => "01",
         "February" => "02",
@@ -33,50 +32,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($birth_month) && !empty($birth_day) && !empty($birth_year)) {
         $birth_month = $month_map[$birth_month] ?? '01'; // Default to January if month is invalid
         $birth_date = $birth_year . '-' . $birth_month . '-' . str_pad($birth_day, 2, '0', STR_PAD_LEFT);
-    } else {
-        $birth_date = NULL; // If any part of the birth date is missing
     }
 
     $address = $_POST['address'] ?? '';
     $phone_number = $_POST['phone_number'] ?? '';
 
 
-
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         // Define allowed file types
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-
+        $allowed_types = ['image/jpeg', 'image/png'];
+    
         // Get file info
         $file_name = $_FILES['image']['name'];
         $file_tmp_name = $_FILES['image']['tmp_name'];
         $file_size = $_FILES['image']['size'];
         $file_type = $_FILES['image']['type'];
-
+    
         // Check if the uploaded file is a valid image
         if (in_array($file_type, $allowed_types)) {
-            // Check if the file size is less than 5MB (5000000 bytes)
-            if ($file_size <= 5000000) {
+            if ($file_size <= 10000000) {
                 // Specify the base upload directory
                 $base_upload_dir = 'private/OneByOne_ID/';
-
-                // Create a folder with the name of the o$osca_id
+    
+                // Create a folder with the name of the osca_id
                 $oscar_folder = $base_upload_dir . $osca_id . '/';
-
-                // Ensure the folder exists or create it
+    
                 if (!is_dir($oscar_folder)) {
-                    mkdir($oscar_folder, 0777, true);  // Create folder with 0777 permissions
+                    mkdir($oscar_folder, 0777, true); 
                 }
-
                 // Generate a unique file name to avoid overwriting
                 $unique_file_name = uniqid('img_') . '.' . pathinfo($file_name, PATHINFO_EXTENSION);
                 $full_file_path = $oscar_folder . $unique_file_name;
-                // Move the uploaded file to the specific o$osca_id folder
-                if (move_uploaded_file($file_tmp_name, $oscar_folder . $unique_file_name)) {
-                    echo "File uploaded successfully!<br>";
-                    echo "File name: " . $unique_file_name;
-                } else {
+                if (!move_uploaded_file($file_tmp_name, $oscar_folder . $unique_file_name)) {
                     echo "There was an error uploading the file.";
-                }
+                } 
             } else {
                 echo "File is too large. Please upload a file smaller than 5MB.";
             }
@@ -86,14 +75,100 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "No file uploaded or there was an upload error.";
     }
+    
+    if (isset($_FILES['image-signature']) && $_FILES['image-signature']['error'] == 0) {
+        $allowed_types_sig = ['image/jpeg', 'image/png', 'image/gif'];
+    
+        $file_name_sig = $_FILES['image-signature']['name'];
+        $file_tmp_name_sig = $_FILES['image-signature']['tmp_name'];
+        $file_size_sig = $_FILES['image-signature']['size'];
+        $file_type_sig = $_FILES['image-signature']['type'];
+    
+        if (in_array($file_type_sig, $allowed_types_sig)) {
+            if ($file_size_sig <= 10000000) {
+                // Specify the base upload directory
+                $base_upload_dir_sig = 'private/signature/';
+    
+                $oscar_folder_sig = $base_upload_dir_sig . $osca_id . '/';
+    
+                // Ensure the folder exists or create it
+                if (!is_dir($oscar_folder_sig)) {
+                    mkdir($oscar_folder_sig, 0777, true);  // Create folder with 0777 permissions
+                }
+    
+                $unique_file_name_sig = uniqid('sig_') . '.' . pathinfo($file_name_sig, PATHINFO_EXTENSION);
+                $full_file_path_sig = $oscar_folder_sig . $unique_file_name_sig;
+                // Move the uploaded file to the specific osca_id folder
+                if (!move_uploaded_file($file_tmp_name_sig, $oscar_folder_sig . $unique_file_name_sig)) {
+                    echo "There was an error uploading the signature.";
+                } 
+            } else {
+                echo "Signature file is too large. Please upload a file smaller than 5MB.";
+            }
+        } else {
+            echo "Invalid file type for signature. Only JPG, PNG, and GIF files are allowed.";
+        }
+    } else {
+        echo "No signature file uploaded or there was an upload error.";
+    }
+    if (isset($_FILES['image-documents']) && count($_FILES['image-documents']['name']) > 0) {
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
+    
+        $file_count = count($_FILES['image-documents']['name']);
+        $uploaded_files = [];
+    
+        // Specify the base upload directory
+        $base_upload_dir = 'private/documents/';
+        $osca_id = $_POST['osca_id'];
+    
+        // Create a folder for the osca_id
+        $osca_folder = $base_upload_dir . $osca_id . '/';
+        if (!is_dir($osca_folder)) {
+            mkdir($osca_folder, 0777, true); // Create folder with 0777 permissions
+        }
+    
+        for ($i = 0; $i < $file_count; $i++) {
+            // Get individual file details
+            $file_name = $_FILES['image-documents']['name'][$i];
+            $file_tmp_name = $_FILES['image-documents']['tmp_name'][$i];
+            $file_size = $_FILES['image-documents']['size'][$i];
+            $file_type = $_FILES['image-documents']['type'][$i];
+    
+            // Validate file type and size
+            if (in_array($file_type, $allowed_types) && $file_size <= 5000000) {
+                $unique_file_name = uniqid('doc_') . '.' . pathinfo($file_name, PATHINFO_EXTENSION);
+                $full_file_path = $osca_folder . $unique_file_name;
+    
+                // Move the file to the osca_id folder
+                if (move_uploaded_file($file_tmp_name, $full_file_path)) {
+                    $uploaded_files[] = $full_file_path; // Save the file path for database storage
+                } else {
+                    echo "Error uploading file: " . $file_name;
+                }
+            } else {
+                echo "Invalid file type or size for file: " . $file_name;
+            }
+        }
+        // Check if any files were successfully uploaded
+        if (!empty($uploaded_files)) {
+            // Convert file paths to JSON
+            $documents_path_json = json_encode($uploaded_files);
+    
+        } else {
+            echo "No valid files uploaded.";
+        }
+    } else {
+        echo "No files selected for upload.";
+    }
+    
+    
     try {
-        // Prepare SQL statement for insertion
         $sql = "INSERT INTO users (osca_id, last_name, first_name, middle_name, suffix, sex, birth_day, address, phone_number, oneByOne_id_path) 
                 VALUES (:osca_id, :last_name, :first_name, :middle_name, :suffix, :sex, :birth_date, :address, :phone_number, :full_path)";
-
+        $sqlDocs = "INSERT INTO user_documents (id, signature_id, documents_path) VALUES (:osca_id, :full_path_sig, :documents_path)";
         $stmt = $pdo->prepare($sql);
+        $stmt_second = $pdo->prepare( $sqlDocs);
 
-        // Bind the parameters and execute the statement
         $stmt->execute([
             ':osca_id' => $osca_id,
             ':last_name' => $last_name,
@@ -106,14 +181,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':phone_number' => $phone_number,
             ':full_path' => $full_file_path,
         ]);
+        $stmt_second->execute([
+            ':osca_id' => $osca_id,
+            ':full_path_sig' => $full_file_path_sig,
+            ':documents_path' => $documents_path_json
+        ]);
 
-        // If the insert is successful, show a success message
+       
         echo "Data inserted successfully!";
     } catch (PDOException $e) {
-        // Handle any insertion errors
         echo "Error: " . $e->getMessage();
-
-        // Debug: print SQL query and parameters
         echo "<pre>";
         echo "SQL Query: $sql\n";
         print_r([

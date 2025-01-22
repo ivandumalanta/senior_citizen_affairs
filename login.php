@@ -18,27 +18,20 @@ if (isset($_SESSION['loggedin']) &&  $_SESSION['loggedin'] == true) {
 <body>
     <h2>Login</h2>
     <form id="loginForm">
-        <!-- Email field -->
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
-
-        <!-- Password field -->
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
-
-        <!-- Submit button -->
         <button type="submit">Login</button>
     </form>
 
     <script>
         // jQuery to intercept form submission
         $('#loginForm').submit(function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
+            event.preventDefault();
             var username = $('#username').val();
             var password = $('#password').val();
 
-            // Perform an AJAX request to submit the form data
             $.ajax({
                 url: 'login-submit.php',  // The URL to submit the form to
                 type: 'POST',
@@ -53,7 +46,6 @@ if (isset($_SESSION['loggedin']) &&  $_SESSION['loggedin'] == true) {
                     alert(response);
                 },
                 error: function() {
-                    // Handle errors
                     alert('An error occurred while submitting the form.');
                 }
             });
