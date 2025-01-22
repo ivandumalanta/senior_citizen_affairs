@@ -1,5 +1,7 @@
 <?php
+// Include the database connection file
 include './database/db_connection.php';
+include './register_function.php';
 
 ?>
 
