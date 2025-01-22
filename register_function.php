@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         // Check if the uploaded file is a valid image
         if (in_array($file_type, $allowed_types)) {
-            if ($file_size <= 10000000) {
+            if ($file_size <= 500000000) {
                 // Specify the base upload directory
                 $base_upload_dir = 'private/OneByOne_ID/';
     
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $file_type_sig = $_FILES['image-signature']['type'];
     
         if (in_array($file_type_sig, $allowed_types_sig)) {
-            if ($file_size_sig <= 10000000) {
+            if ($file_size_sig <= 500000000) {
                 // Specify the base upload directory
                 $base_upload_dir_sig = 'private/signature/';
     
@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $file_type = $_FILES['image-documents']['type'][$i];
     
             // Validate file type and size
-            if (in_array($file_type, $allowed_types) && $file_size <= 5000000) {
+            if (in_array($file_type, $allowed_types) && $file_size <= 500000000) {
                 $unique_file_name = uniqid('doc_') . '.' . pathinfo($file_name, PATHINFO_EXTENSION);
                 $full_file_path = $osca_folder . $unique_file_name;
     

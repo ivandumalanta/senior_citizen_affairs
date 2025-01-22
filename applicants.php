@@ -22,7 +22,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applicants</title>
+    <title>Pending Applicants</title>
 </head>
 <body>
     <nav class="navbar">
@@ -40,6 +40,7 @@ try {
                 <th>Middle Name</th>
                 <th>Suffix</th>
                 <th>Gender</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -49,20 +50,17 @@ try {
                         <td><?php echo htmlspecialchars($user['osca_id']); ?></td>
                         <td><?php echo htmlspecialchars($user['last_name']); ?></td>
                         <td><?php echo htmlspecialchars($user['first_name']); ?></td>
-                        <td>
-                            <?php 
-                                echo htmlspecialchars($user['middle_name'] ?? 'N/A'); 
-                            ?>
-                        </td>
+                        <td><?php echo htmlspecialchars($user['middle_name'] ?? 'N/A'); ?></td>
                         <td><?php echo htmlspecialchars($user['suffix']); ?></td>
                         <td><?php echo htmlspecialchars($user['sex']); ?></td>
-                        <td><button>Review</button></td>
-                        <td><button>Approved</button></td>
+                        <td>
+                            <a href="view_user.php?id=<?php echo htmlspecialchars($user['osca_id']); ?>">View</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="6">No pending applicants found.</td>
+                    <td colspan="7">No pending applicants found.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
