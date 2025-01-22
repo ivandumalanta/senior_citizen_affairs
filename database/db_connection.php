@@ -13,11 +13,9 @@ if ($conn->connect_error) {
 }
 
 try {
-    // Update PDO connection
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    // Handle connection error
     die("Connection failed: " . $e->getMessage());
 }
 
