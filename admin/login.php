@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['loggedin']) &&  $_SESSION['loggedin'] == true) {
-    header("Location: dashboard.php");
+    header("Location: index.php");
     exit;
 }
 ?>
@@ -42,7 +42,7 @@ if (isset($_SESSION['loggedin']) &&  $_SESSION['loggedin'] == true) {
                 success: function(response) {
   
                     console.log(response);
-                    window.location.href = 'dashboard.php'; 
+                    window.location.href = './index.php'; 
                     alert(response);
                 },
                 error: function() {

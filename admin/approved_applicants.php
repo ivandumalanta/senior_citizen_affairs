@@ -1,5 +1,5 @@
 <?php
-include './database/db_connection.php';
+include '.././database/db_connection.php';
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -8,8 +8,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 try {
-    $sql = "SELECT osca_id, last_name, first_name, middle_name, suffix, sex FROM users WHERE status = 'pending'";
-    $stmt = $pdo->query($sql);
+    $sql = "SELECT osca_id, last_name, first_name, middle_name, suffix, sex FROM users WHERE status = 'approved' ORDER BY created_at DESC";
+    $stmt = $pdo->query($sql);  
 
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -22,14 +22,16 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pending Applicants</title>
+    <title>Applicants</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <?php include './components/admin-nav.php'; ?>
+    <?php include '.././components/admin-nav.php'; ?>
     </nav>
 
-    <h1>Pending Applicants</h1>
+    <h1>    Applicants</h1>
 
     <table border="1" cellpadding="10" cellspacing="0">
         <thead>
@@ -66,6 +68,5 @@ try {
         </tbody>
     </table>
 
-    <a href="logout.php">Logout</a>
 </body>
 </html>
