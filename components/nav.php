@@ -14,7 +14,7 @@
     <ul class="nav navbar-nav">
         <li><a href="index.php">Home</a></li>
         <li><a href="#">Benefits</a></li>
-        <li><a href="#">Activities</a></li>
+        <li><a href="activities.php">Activities</a></li>
         <li><a href="#">Analytics</a></li>
         <li><a href="register.php">Register</a></li>
     </ul>
