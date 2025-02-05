@@ -16,6 +16,10 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
+//admin cred
+// username: admin
+// pass: scamanagement_2025
 
-$conn->close();
+
+
 ?>

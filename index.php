@@ -1,6 +1,22 @@
- <?php
-        include './database/db_connection.php';
-?> 
+<?php
+    include './database/db_connection.php';
+
+    $sql_headline = "SELECT * FROM news WHERE headline = 1 ORDER BY news_date ASC";
+
+    $sql_latest = "SELECT * FROM news ORDER BY news_date DESC";
+
+    try {
+
+        $stmt_headline = $pdo->query($sql_headline);
+        $headline_news = $stmt_headline->fetchAll(PDO::FETCH_ASSOC); 
+ 
+        $stmt_latest = $pdo->query($sql_latest);
+        $latest_news = $stmt_latest->fetchAll(PDO::FETCH_ASSOC); // Fetch all the latest news
+    } catch (PDOException $e) {
+        die("Error executing query: " . $e->getMessage());
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +24,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senior citizen affairs</title>
-    <link rel="stylesheet" href="assets/css/style.css"> <!-- Link to external CSS -->
+    <link rel="stylesheet" href="assets/css/styleHome.css"> <!-- Link to external CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -20,7 +36,7 @@
         <?php include './components/nav.php'; ?>
     </nav>
 
-    <main>
+    <main class="heromain">
         <section id="home">
             <div class="container-fluid homeimage">
                 <div class="row">
@@ -82,73 +98,102 @@
 
         </section>
         <section id="newslist">
-            <div class="container-fluid spacingtop">
-                <div class="row">
-                    <div class="col-sm-2 calendarbody text-center">
-                    <span><b id="current-year"></b></span>
-                        <br>
-                        <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="showToday()">
-                            <img src="https://jk2ws3.axshare.com/gsc/JK2WS3/7d/72/d7/7d72d709bc3b4c8cb808bfd8757274b5/images/home/u27.svg?pageId=72106482-35bb-4343-a7ce-8978a29e3df2"
-                                alt="Calendar Icon"
-                                style="width: 50px; height: 50px; cursor: pointer;">
-                        </a>
-                        <div id="calendarModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Calendar</h4>
-                        <div id="calendar"></div>
-                    </div>
-                    <div class="modal-body">
-                    <div class="current-day" id="current-day"></div>
-                        <div id="calendarContainer" style="text-align: center;">
-                            <!-- Calendar will render here -->
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+    <div class="container-fluid spacingtop">
+        <div class="row">
+            <div class="col-sm-2 calendarbody text-center">
+                <span><b id="current-year"></b></span>
+                <br>
+                <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="showToday()">
+                    <img src="https://jk2ws3.axshare.com/gsc/JK2WS3/7d/72/d7/7d72d709bc3b4c8cb808bfd8757274b5/images/home/u27.svg?pageId=72106482-35bb-4343-a7ce-8978a29e3df2"
+                        alt="Calendar Icon"
+                        style="width: 50px; height: 50px; cursor: pointer;">
+                </a>
             </div>
-        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <p class="font16"> <img src="https://jk2ws3.axshare.com/gsc/JK2WS3/7d/72/d7/7d72d709bc3b4c8cb808bfd8757274b5/images/home/u22.svg?pageId=72106482-35bb-4343-a7ce-8978a29e3df2" alt="">
-                         <b>List of News</b></p>
+            <div class="col-sm-4">
+                <p class="font16"> <img src="https://jk2ws3.axshare.com/gsc/JK2WS3/7d/72/d7/7d72d709bc3b4c8cb808bfd8757274b5/images/home/u22.svg?pageId=72106482-35bb-4343-a7ce-8978a29e3df2" alt="">
+                    <b>List of News</b></p>
+                <!-- News Navigation Tabs -->
+                <div class="news-tabs">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#" id="headline-tab">Headline</a></li>
+                        <li><a href="#" id="latest-tab">Latest</a></li>
+                    </ul>
+                </div>
 
+                <!-- News Content Area -->
+                <div id="news-content">
+                    <!-- Default content for Headline -->
+                    <div id="headline-content">
+                        <?php foreach($headline_news as $row): 
+                            $news_date = strtotime($row['news_date']);
+                            $formatted_date = ($news_date) ? date('F j, Y', $news_date) : 'Invalid Date';
+                        ?>
                         <p><br>
-                            Salceda eyes separate PhilHealth insurance fund for seniors
+                            <?php echo $row['title']; ?>
                             <br>
-                            BY Dexter Barro II
+                            BY <?php echo $row['author']; ?>
                             <br>
-                            Apr 2, 2024 09:13 PM
+                            <?php echo $formatted_date ?>
                         </p>
-                        <p>At a glance
-
-                            House Committee on Ways and Means Chairman Albay 2nd district Rep. Joey Salceda says he is exploring the prospect of a separate insurance fund under the Philippine Health Insurance Corp. (PhilHealth) to address the healthcare financing gap of senior citizens.</p>
-                        <hr>
-                        </div>
-                    <div class="col-sm-6 text-center buttonspacing">
-                    <a href="./register.php">
-                        <button type="submit" class="registerbutton">Register</button>
-                      </a>
-                        <a href="#">
-                        <button type="submit" class="verifybuttton">Verify Here!</button>
-                        </a>
+                        <p><?php echo $row['content']; ?></p><hr>
+                        <?php endforeach ?>
                     </div>
 
-                    
+                    <!-- Latest news (this can be dynamically updated later using AJAX) -->
+                    <div id="latest-content" style="display: none;">
+                        <!-- Fetch latest news dynamically or show predefined latest news -->
+                        <ol style="display: flex; flex-direction: column; gap: 10px;">
+                        <?php foreach ($latest_news as $row): ?>
+    <li>
+        <a href="view_news.php?id=<?php echo htmlspecialchars($row['id'] ?? ''); ?>">
+            <?php echo htmlspecialchars($row['title']); ?>
+        </a>
+    </li>
+<?php endforeach; ?>
+
+                        </ol>
+
+                    </div>
                 </div>
             </div>
-        </section>
+            <div class="col-sm-6 text-center buttonspacing">
+                <a href="./register.php">
+                    <button type="submit" class="registerbutton">Register</button>
+                </a>
+                <a href="./verify.php">
+                    <button type="submit" class="verifybuttton">Verify Here!</button>
+                </a>
+            </div>                    
+        </div>
+    </div>
+</section>
     </main>
 
     <script src="assets/js/script.js"></script>
-
+      
+      
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // jQuery to switch between Headline and Latest news
+    $(document).ready(function() {
+        $('#headline-tab').click(function(e) {
+            e.preventDefault();
+            $('#headline-content').show();
+            $('#latest-content').hide();
+            $(this).parent().addClass('active');
+            $('#latest-tab').parent().removeClass('active');
+        });
 
+        $('#latest-tab').click(function(e) {
+            e.preventDefault();
+            $('#latest-content').show();
+            $('#headline-content').hide();
+            $(this).parent().addClass('active');
+            $('#headline-tab').parent().removeClass('active');
+        });
+    });
+</script>
+    <?php include './components/footer.php'; ?>  
     
 </body>
 

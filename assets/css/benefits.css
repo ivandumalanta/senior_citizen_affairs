@@ -1,0 +1,12 @@
+.fontcolor{
+    color: rgb(245,154,35);
+}.formbenefits{
+    display: flex
+    ;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: rgb(215,215,215);
+}

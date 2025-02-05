@@ -7,7 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $middle_name = isset($_POST['no_middlename']) ? NULL : ($_POST['middle_name'] ?? NULL);
     $suffix = $_POST['suffix'] ?? NULL;
     $sex = $_POST['sex'] ?? '';
-
+    $classification = $_POST['classification'] ?? '';
+    $civil_status = $_POST['civil'] ?? '';
+    $blood_type = $_POST['blood_type'] ?? '';
+    $religion = $_POST['religion'] ?? '';
+    $educational = $_POST['educational_attainment'] ?? '';
+    $employment = $_POST['employment_status'] ?? '';
     // Combine the birth month, day, and year into a single date string
     $birth_month = $_POST['birth_month'] ?? '';
     $birth_day = $_POST['birth_day'] ?? '';
@@ -163,8 +168,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
     try {
-        $sql = "INSERT INTO users (osca_id, last_name, first_name, middle_name, suffix, sex, birth_day, address, phone_number, oneByOne_id_path) 
-                VALUES (:osca_id, :last_name, :first_name, :middle_name, :suffix, :sex, :birth_date, :address, :phone_number, :full_path)";
+        $sql = "INSERT INTO users (osca_id, last_name, first_name, middle_name, suffix, sex, birth_day, address, phone_number, oneByOne_id_path, classification, civil_status, blood_type, education, employment, religion, member_status) 
+        VALUES (:osca_id, :last_name, :first_name, :middle_name, :suffix, :sex, :birth_date, :address, :phone_number, :full_path, :classification, :civil_status, :blood_type, :educational, :employment, :religion, :member_status)";
+
         $sqlDocs = "INSERT INTO user_documents (id, signature_id, documents_path) VALUES (:osca_id, :full_path_sig, :documents_path)";
         $stmt = $pdo->prepare($sql);
         $stmt_second = $pdo->prepare( $sqlDocs);
@@ -176,11 +182,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':middle_name' => $middle_name,
             ':suffix' => $suffix,
             ':sex' => $sex,
-            ':birth_date' => $birth_date,
+            ':birth_date' => $birth_date, // Matches :birth_date
             ':address' => $address . ', Malasiqui, Pangasinan',
             ':phone_number' => $phone_number,
-            ':full_path' => $full_file_path,
+            ':full_path' => $full_file_path, // Matches :full_path
+            ':classification' => $classification,
+            ':civil_status' => $civil_status,
+            ':blood_type' => $blood_type,
+            ':educational' => $educational,
+            ':employment' => $employment, // Matches :employment
+            ':religion' => $religion,
+            ':member_status' => null
         ]);
+        
         $stmt_second->execute([
             ':osca_id' => $osca_id,
             ':full_path_sig' => $full_file_path_sig,
@@ -202,7 +216,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':sex' => $sex,
             ':birth_date' => $birth_date,
             ':address' => $address,
-            ':phone_number' => $phone_number
+            ':phone_number' => $phone_number,
+            ':full_path' => $full_file_path,
+            ':classification' => $classification,
+            ':civil_status' => $civil_status,
+            ':blood_type' => $blood_type,
+            ':educational' => $educational,
+            ':employment' => $employment,
+            ':religion' => $religion,
         ]);
         echo "</pre>";
     }

@@ -1,0 +1,9 @@
+.masthead {
+    height: 40vh;
+    min-height: 400px;
+    background-image: url('https://remate.ph/wp-content/uploads/2024/10/4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 20px;
+  }
