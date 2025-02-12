@@ -35,11 +35,19 @@ try {
 
 <main>
 <section>
+<<<<<<< HEAD
     <div class="masthead" data-aos="fade-up">
  
   </div>
     </div>
         <div class="container" data-aos="fade-left">
+=======
+    <div class="masthead" >
+ 
+  </div>
+    </div>
+        <div class="container ">
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
             <div class="row">
             <p class="acitivitybox">Latest Activities</p>
                 <div class="col-sm-12">
@@ -86,10 +94,13 @@ try {
     
     </section>
 </main>
+<<<<<<< HEAD
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
+=======
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
 <?php include './components/footer.php'; ?>  
 </body>
 </html>

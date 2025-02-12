@@ -1,5 +1,9 @@
 .fontcolor{
+<<<<<<< HEAD
     color:rgb(245 35 57);
+=======
+    color: rgb(245,154,35);
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
 }.formbenefits{
     display: flex
     ;
@@ -8,9 +12,12 @@
         align-content: center;
         justify-content: center;
         align-items: flex-start;
+<<<<<<< HEAD
         padding-top:3%;
         padding-left: 3% !important;
         padding-right: 3% !important;
         padding-bottom: 3%;
+=======
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
         background-color: rgb(215,215,215);
 }

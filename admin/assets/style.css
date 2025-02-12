@@ -20,7 +20,11 @@ body {
 }
 
 .sidebar {
+<<<<<<< HEAD
   background-color:red;
+=======
+  background-color: rgba(245, 154, 35, 0.996);
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
   color: white;
   min-width: 250px;
   max-width: 250px;

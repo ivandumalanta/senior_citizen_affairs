@@ -3,7 +3,11 @@
     width: 15%;
     height: 32px;
     background: inherit;
+<<<<<<< HEAD
     background-color: rgb(245 35 57);
+=======
+    background-color: rgba(245, 154, 35, 1);
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
     border-radius: 9px;
     filter: drop-shadow(none);
     transition: none;

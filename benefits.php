@@ -10,8 +10,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     
+=======
+
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
 </head>
 
 <body>
@@ -20,10 +24,17 @@
     </nav>
 
     <main class="heromain">
+<<<<<<< HEAD
       <div class="container" data-aos="fade-up">
 
         <h2 class="fontcolor"><b>Benefits of Senior Citizen</b></h2>
         <div class="row ">
+=======
+      <div class="container">
+
+        <h2 class="fontcolor"><b>Benefits of Senior Citizen</b></h2>
+        <div class="row">
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
             <div class="col-sm-12 formbenefits">
             <h4><b>20% Discounts</b></h4>
     <ul>
@@ -137,8 +148,13 @@
    
     <?php include './components/footer.php'; ?>  
 </body>
+<<<<<<< HEAD
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
         AOS.init();
     </script>
+=======
+
+
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
 </html>
