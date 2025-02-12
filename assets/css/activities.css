@@ -1,0 +1,26 @@
+.acitivitybox{
+    border-width: 0px;
+    width: 15%;
+    height: 32px;
+    background: inherit;
+    background-color: rgb(245 35 57);
+    border-radius: 9px;
+    filter: drop-shadow(none);
+    transition: none;
+    font-size: 19px;
+    color: #FFFFFF;
+    text-align: center;
+}.activitycontainer{
+    border-width: 0px;
+    
+    width: 573px;
+    height: 175px;
+    display: flex
+;
+    transition: none;
+    font-size: 16px;
+    color: #D9001B;
+
+    filter: drop-shadow(8px 5px 2.5px rgba(0, 0, 0, 0.34901960784313724));
+}
+

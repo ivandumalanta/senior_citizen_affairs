@@ -17,5 +17,5 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
-$conn->close();
+
 ?>

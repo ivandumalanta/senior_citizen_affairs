@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $user['username']; 
-
+        $_SESSION['osca_id'] = $user['id'];
+        $_SESSION['admin'] = true;
         echo "Login successful!";
     } else {
         echo "Invalid credentials.";

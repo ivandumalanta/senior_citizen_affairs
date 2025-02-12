@@ -1,0 +1,16 @@
+.fontcolor{
+    color:rgb(245 35 57);
+}.formbenefits{
+    display: flex
+    ;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top:3%;
+        padding-left: 3% !important;
+        padding-right: 3% !important;
+        padding-bottom: 3%;
+        background-color: rgb(215,215,215);
+}

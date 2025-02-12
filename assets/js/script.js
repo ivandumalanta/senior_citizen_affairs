@@ -55,3 +55,9 @@ $(document).ready(function() {
 
   generateCalendar(); // Call the function to display the calendar
 });
+
+
+
+
+// register pagge
+

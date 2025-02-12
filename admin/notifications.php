@@ -48,28 +48,40 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New User Registration Requests</title>
+    <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <nav class="navbar">
     <?php include '.././components/admin-nav.php'; ?>
     </nav>
-
-    <h1>Notifications</h1>
-
-    <ul>
-        <?php foreach ($users as $user): ?>
-            <li>
-                <?php if (isset($user['osca_id'])): ?>
-                    <a href="view_user.php?id=<?php echo htmlspecialchars($user['osca_id']); ?>">
-                        <strong>New User Registration Request</strong> - <?php echo timeAgo($user['created_at']); ?>
-                    </a>
-                <?php else: ?>
-                    <strong>New User Registration Request</strong> - <?php echo timeAgo($user['created_at']); ?>
-                <?php endif; ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+<div class="main-content">
+<div class="container">
+        <h1 class="text-center">Notifications</h1>
+        <div class="list-group">
+            <?php foreach ($users as $user): ?>
+                <a href="view_user.php?id=<?php echo htmlspecialchars($user['osca_id'] ?? ''); ?>" class="list-group-item">
+                    <h4 class="list-group-item-heading">
+                        <strong>New User Registration Request</strong>
+                        <i class="bi bi-three-dots pull-right"></i> <!-- Icon aligned to the right -->
+                    </h4>
+                    <p class="list-group-item-text text-muted">
+                        <?php echo timeAgo($user['created_at']); ?>
+                    </p>
+                </a>
+            <?php endforeach; ?>
+            <?php if (empty($users)): ?>
+                <div class="alert alert-info text-center" role="alert">
+                    <i class="bi bi-info-circle"></i> No new notifications at the moment.
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <!-- end main -->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

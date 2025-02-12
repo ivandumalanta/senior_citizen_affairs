@@ -1,0 +1,60 @@
+.analyticsbutton{
+  border-width: 0px;
+  width: 251px !important;
+  height: 55px !important;
+  background: inherit;
+  background-color: rgba(245, 154, 35, 1);
+  border-radius: 8px;
+  filter: drop-shadow(7px 5px 2.5px rgba(0, 0, 0, 0.34901960784313724));
+  transition: none;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+
+}
+.linkbutton{
+    font-size: 20px;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+}.formanalytics{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+}
+
+/* chart 1 */
+
+.chart-container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.chart-title {
+  text-align: center;
+  background-color: #a11f1f;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.chart-container2 {
+  width: 50%;
+  margin: 20px auto;
+}
+
+.chart-title2 {
+  text-align: center;
+  background-color: #a11f1f;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 26%;
+}.chart2size{
+  border: solid 1px black;
+}

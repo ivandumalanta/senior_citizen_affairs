@@ -1,0 +1,82 @@
+body {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+.user-list {
+  width: 25%;
+  height: 100vh;
+  overflow-y: auto;
+  
+}
+.user {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid wheat;
+}
+.user:hover {
+  background: rgb(255, 242, 166);
+}
+.chat-box {
+  width: 84%;
+  padding: 20px;
+  display: none;
+  background: white;
+  border-radius: 0 20px 20px 0;
+}
+.messages {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column; /* This makes the newest messages appear at the bottom */
+    background-color:  rgb(246, 238, 223);
+}
+  
+.message {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  max-width: 70%;
+}
+.sent {
+  background: wheat;
+  color: black;
+  align-self: flex-end;
+}
+.received {
+  background: #f8f2e9;
+  color: black;
+  align-self: flex-start;
+}.rowchat{
+    display: flex ;
+        flex-direction: row;
+        flex-wrap: wrap;
+        
+        padding:2%;
+        border-radius: 15px;
+}.row-textbtn{
+    display: flex;
+    flex-direction: row;
+    
+}.btnbutton{
+    width: 20%;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5%;
+    color: white;
+    background-color: rgba(245, 154, 35, 0.996);
+}.userside{
+
+    width: 16%;
+    background-color: rgb(252 236 192);
+    color: black;
+    border-radius: 20px 0 0 20px;
+    padding: 2%;
+}.chatflex{
+    display: flex
+    ;
+        flex-direction: row;
+}

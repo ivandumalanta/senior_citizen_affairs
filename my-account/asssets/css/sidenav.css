@@ -1,0 +1,85 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    
+  }.main-content{
+    background-color: rgb(228, 222, 222);
+  }.formbox{
+    border-width: 0px;
+    width: 100%;
+    height: 151px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    filter: drop-shadow(none);
+   
+    padding:2%;
+    padding-left: 8%;
+  }
+  
+  .sidebar {
+    background-color:red;
+    color: white;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    padding: 20px 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar p {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+   margin-bottom: 40%; /* Ensures space below the p element */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 23px;
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: center;
+  /* Ensures the ul takes up the remaining space */
+  }
+  
+  .sidebar ul li {
+    margin: 0;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    filter: drop-shadow(8px 5px 2.5px rgba(0, 0, 0, 0.34901960784313724));
+  }
+  
+  .sidebar ul li a i {
+    margin-right: 10px;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: white;
+    color: rgb(7, 148, 130);
+  }
+  
+  .main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .sidebar ul li:last-child {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+  }
