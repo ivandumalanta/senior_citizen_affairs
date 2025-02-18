@@ -37,9 +37,18 @@ if (isset($_SESSION['loggedin']) &&  $_SESSION['loggedin'] == true) {
 
                         <input type="text" id="username" name="username" class="userdesign" placeholder="Username" required><br><br>
                         <input type="password" id="password" name="password" class="passworddesign" placeholder="Password"><br><br>
+<<<<<<< HEAD
                      
                         <button type="submit" class="spacingtop login-btn ">Login</button><br><br>
+<<<<<<< HEAD
                        
+=======
+                        <a href="forgotpass.php" class="font16">Forgot Password?</a> 
+=======
+                        <a href="forgotpass.php" class="font16">Forgot Password?</a> <br><br>
+                        <button type="submit" class="spacingtop login-btn ">Login</button>
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
+>>>>>>> 053161d09d82855834f492af80b5d12eb10e59f6
                         
                     </form>
                 </div>

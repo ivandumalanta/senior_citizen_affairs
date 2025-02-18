@@ -25,6 +25,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senior citizen affairs</title>
     <link rel="stylesheet" href="assets/css/styleHome.css"> <!-- Link to external CSS -->
+    <link rel="stylesheet" href="assets/css/styleHome.css"> <!-- Link to external CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -48,6 +49,7 @@ try {
         <?php include './components/nav.php'; ?>
     </nav>
 
+    <main class="heromain">
     <main class="heromain">
         <section id="home">
             <div class="container-fluid homeimage" data-aos="fade-up">
@@ -142,9 +144,12 @@ try {
                         ?>
                         <p><br>
                             <?php echo $row['title']; ?>
+                            <?php echo $row['title']; ?>
                             <br>
                             BY <?php echo $row['author']; ?>
+                            BY <?php echo $row['author']; ?>
                             <br>
+                            <?php echo $formatted_date ?>
                             <?php echo $formatted_date ?>
                         </p>
                         <p><?php echo $row['content']; ?></p><hr>

@@ -18,7 +18,11 @@ body, html {
     bottom: 0;
     left: 0;
     width: 100%;
+<<<<<<< HEAD
     background-color:red;
+=======
+    background-color:rgba(245, 154, 35, 1);
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
     color: white;
     text-align: center;
     padding: 10px 0;

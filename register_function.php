@@ -172,8 +172,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
     try {
+<<<<<<< HEAD
         $sql = "INSERT INTO users (osca_id, username, password, email, last_name, first_name, middle_name, suffix, sex, birth_day, address, phone_number, oneByOne_id_path, classification, civil_status, blood_type, education, employment, religion, member_status) 
         VALUES (:osca_id, :username, :password, :email, :last_name, :first_name, :middle_name, :suffix, :sex, :birth_date, :address, :phone_number, :full_path, :classification, :civil_status, :blood_type, :educational, :employment, :religion, :member_status)";
+=======
+        $sql = "INSERT INTO users (osca_id, last_name, first_name, middle_name, suffix, sex, birth_day, address, phone_number, oneByOne_id_path, classification, civil_status, blood_type, education, employment, religion, member_status) 
+        VALUES (:osca_id, :last_name, :first_name, :middle_name, :suffix, :sex, :birth_date, :address, :phone_number, :full_path, :classification, :civil_status, :blood_type, :educational, :employment, :religion, :member_status)";
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
 
         $sqlDocs = "INSERT INTO user_documents (id, signature_id, documents_path) VALUES (:osca_id, :full_path_sig, :documents_path)";
         $stmt = $pdo->prepare($sql);

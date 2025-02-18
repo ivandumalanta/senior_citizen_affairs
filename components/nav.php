@@ -25,6 +25,7 @@
             <img src="https://www.oscaportal.com/logo/logo.png" alt="Office of Senior Citizen Affairs Malasiqui" title="Office of Senior Citizen Affairs Malasiqui" class="nav-logo">         
             <a class="navbar-brand" href="index.php">Office of Senior Citizen Affairs <br>Malasiqui</a>
         </div>
+<<<<<<< HEAD
         <div class="col-sm-4 nav-header spacingmobile ">
    
         <a href="././my-account/index.php" id="login"  class="btn btn-info custom-account-link">
@@ -69,6 +70,10 @@ document.addEventListener("click", function(event) {
     }
 });
 </script>
+=======
+        <div class="col-sm-4 nav-header spacingmobile">
+            <input type="text" class="form-control "placeholder="Search">
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
         </div>
     </div>
 </div>

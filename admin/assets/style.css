@@ -23,7 +23,15 @@ margin: 0 auto;
 }
 
 .sidebar {
+<<<<<<< HEAD
   background-color:blue;
+=======
+<<<<<<< HEAD
+  background-color:red;
+=======
+  background-color: rgba(245, 154, 35, 0.996);
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
+>>>>>>> 053161d09d82855834f492af80b5d12eb10e59f6
   color: white;
   min-width: 250px;
   max-width: 250px;

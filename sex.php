@@ -18,7 +18,10 @@ include './database/db_connection.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+=======
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
 </head>
 
 <body>
@@ -28,7 +31,11 @@ include './database/db_connection.php';
     </nav>
 
     <main class="heromain">
+<<<<<<< HEAD
         <div class="container" data-aos="fade-up">
+=======
+        <div class="container">
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
         <div class="chart-title2">Sex</div>
             <div class="row">
                 <div class="col-sm-12">
@@ -86,10 +93,14 @@ include './database/db_connection.php';
         // Render the chart when the page loads
         initSexChart();
     </script>
+<<<<<<< HEAD
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
  <script>
      AOS.init();
  </script>
+=======
+   
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
     <?php include './components/footer.php'; ?>  
     </body>
 

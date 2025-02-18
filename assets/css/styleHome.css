@@ -63,7 +63,11 @@ body{
   clear: both;
   font-weight: 400;
   line-height: 1.42857143;
+<<<<<<< HEAD
   color: rgb(245 35 57) !important;
+=======
+  color:rgba(245, 154, 35, 1) !important;
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
   white-space: nowrap;
   background-color: white;
 }.navbar-nav>li>.dropdown-menu {
@@ -109,7 +113,11 @@ body{
    /* align-content: c enter; */
     justify-content: center;
     align-items: flex-start;
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 8eccebdcf9e512e252379c259a47eaee57446794
     
     
 }
