@@ -70,8 +70,8 @@ try {
                 <h1><b>Pending Applicants</b></h1>
                 <div class="col-sm-12 formapplicants">
                     <div class="flex">
-                    <span><a href="approved_applicants.php" class="btn btn-success btn-sm spacingtop20">Approved Applicants</a></span>
-
+                    <span><a href="approved_applicants.php" class="btn btn-primary   btn-sm spacingtop20">Approved Applicants</a></span>
+                    <span><a href="declined_applicants.php" class="btn btn-danger btn-sm spacingtop20">Declined Applicants</a></span>
                         <!-- Search Form -->
                         <form action="" method="get" class="spacingtop20 ">
                             <div class="row searchflex">
@@ -89,7 +89,7 @@ try {
                   
 
                     <div class="table-responsive spacingtop20">
-                        <table class="table table-striped table-hover">
+                        <table class="table  table-hover">
                             <thead>
                                 <tr class="rowtable">
                                     <th>OSCA ID</th>

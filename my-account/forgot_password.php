@@ -91,8 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="col-sm-6 login-form text-center">
                 <form id="forgotPasswordForm" class="loginbox">
-                    <h2>Forgot Password</h2>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+                    <h2>Forgot Password</h2><br><br>
+                
+                 
+                    <input type="email" id="email" name="email" placeholder="Enter your email" class="userdesign" required><br>
+               
+                 
 
                     <!-- Response div -->
                     <div id="responseMessage" class="alert" style="display: none;"></div>

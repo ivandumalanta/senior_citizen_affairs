@@ -17,8 +17,13 @@ $info = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Check registration status
 $isRegistered = false;
-if (!empty($info) && $info[0]['status'] === 'approved') {
-    $isRegistered = true;
+$isDeclined = false;
+if (!empty($info)) {
+    if ($info[0]['status'] === 'approved') {
+        $isRegistered = true;
+    } elseif ($info[0]['status'] === 'declined') {
+        $isDeclined = true;
+    }
 }
 
 ?>
@@ -83,7 +88,7 @@ if (!empty($info) && $info[0]['status'] === 'approved') {
             margin-bottom: 15px;
         }
         .text-orange {
-            color: #FFA500;
+            color:rgb(8, 0, 255);
         }
         .text-green {
             color: #28a745;
@@ -143,26 +148,32 @@ if (!empty($info) && $info[0]['status'] === 'approved') {
 
     <script>
         const isRegistered = <?php echo json_encode($isRegistered); ?>;
-    function updateRegistrationStatus(isRegistered) {
-        const statusIcon = document.getElementById('statusIcon');
-        const statusTitle = document.getElementById('statusTitle');
-        const statusMessage = document.getElementById('statusMessage');
+        const isDeclined = <?php echo json_encode($isDeclined); ?>;
 
-        if (isRegistered) {
-            statusIcon.className = 'status-icon glyphicon glyphicon-ok-circle text-green';
-            statusTitle.textContent = 'Verified Account';
-            statusTitle.className = 'text-green';
-            statusMessage.textContent = 'Your account has been successfully verified.';
-        } else {
-            statusIcon.className = 'status-icon glyphicon glyphicon-time text-orange';
-            statusTitle.textContent = 'Registration in Progress';
-            statusTitle.className = 'text-orange';
-            statusMessage.textContent = 'Your registration is still being processed. Please check back later for updates.';
+        function updateRegistrationStatus(isRegistered, isDeclined) {
+            const statusIcon = document.getElementById('statusIcon');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (isRegistered) {
+                statusIcon.className = 'status-icon glyphicon glyphicon-ok-circle text-green';
+                statusTitle.textContent = 'Verified Account';
+                statusTitle.className = 'text-green';
+                statusMessage.textContent = 'Your account has been successfully verified.';
+            } else if (isDeclined) {
+                statusIcon.className = 'status-icon glyphicon glyphicon-remove-circle text-red';
+                statusTitle.textContent = 'Application Declined';
+                statusTitle.className = 'text-red';
+                statusMessage.textContent = 'Unfortunately, your application has been declined. Please contact support for further assistance.';
+            } else {
+                statusIcon.className = 'status-icon glyphicon glyphicon-time text-orange';
+                statusTitle.textContent = 'Registration in Progress';
+                statusTitle.className = 'text-orange';
+                statusMessage.textContent = 'Your registration is still being processed. Please check back later for updates.';
+            }
         }
-    }
-
-    updateRegistrationStatus(isRegistered);
-</script>
+        updateRegistrationStatus(isRegistered, isDeclined);
+    </script>
 
 
 </body>

@@ -1,5 +1,7 @@
 <div class="sidebar">
+<img src="../admin/assets/logo2.png" alt="senior citizen affairs logo" class="logoposition">        
         <p>OSCA <br> Malasiqui</p>
+        
         <ul class="nav navbar-nav">
            
             <li><a href="../my-account/index.php"><i class="bi bi-person"></i>My Application</a></li>

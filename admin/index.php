@@ -45,9 +45,14 @@ if ($result->num_rows > 0) {
         <?php include '.././components/admin-nav.php'; ?>
     </nav>
     <div class="main-content">
-        <h2><b>Analytical Overview</b></h2>
+        
         <div class="container">
             <div class="row ">
+        
+            <div class="col-sm-12">
+            <h2><b>Analytical Overview</b></h2>
+            </div>
+                <div class="col-sm-12">
                 <div class="formbox">
                     <div class="col-sm-3">
                         <div class="boxform ">
@@ -77,6 +82,8 @@ if ($result->num_rows > 0) {
                         </div>
                     </div>
                 </div>
+                </div>
+                
 
             </div>
 

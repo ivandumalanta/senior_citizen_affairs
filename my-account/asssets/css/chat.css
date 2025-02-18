@@ -1,83 +1,83 @@
 body {
-    display: flex;
-    font-family: Arial, sans-serif;
-  }
-  /* .user-list {
-    width: 25%;
-    height: 100vh;
+  display: flex;
+  font-family: Arial, sans-serif;
+/* }
+.user-list {
+  width: 25%;
+  height: 100vh;
+  overflow-y: auto;
+  
+}
+.user {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid wheat;
+}
+.user:hover {
+  background:white;
+} */
+}.chat-box {
+  width: 84%;
+  padding: 20px;
+  display: none;
+  background: white;
+  border-radius: 0 20px 20px 0;
+}
+.messages {
+    height: 400px;
     overflow-y: auto;
-    
-  }
-  .user {
+    border: 1px solid #ddd;
     padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid wheat;
-  }
-  .user:hover {
-    background: rgb(255, 242, 166);
-  } */
-  .chat-box {
-    width: 84%;
-    padding: 20px;
-    display: none;
-    background: white;
-    border-radius: 0 20px 20px 0;
-  }
-  .messages {
-      height: 400px;
-      overflow-y: auto;
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin-bottom: 10px;
-      display: flex;
-      border-radius: 15px;
-      flex-direction: column; /* This makes the newest messages appear at the bottom */
-      background-color:  rgb(246, 238, 223);
-  }
+    margin-bottom: 10px;
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column; /* This makes the newest messages appear at the bottom */
+    background-color:  rgb(246, 238, 223);
+}
+  
+.message {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  max-width: 70%;
+}
+.sent {
+  background:rgb(192 208 252);
+  color: black;
+  align-self: flex-end;
+}
+.received {
+  background: #f8e9e9;
+  color: black;
+  align-self: flex-start;
+}.rowchat{
+    display: flex ;
+        flex-direction: row;
+        flex-wrap: wrap;
+        
+        padding:2%;
+        border-radius: 15px;
+}.row-textbtn{
+    display: flex;
+    flex-direction: row;
     
-  .message {
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 5px;
-    max-width: 70%;
-  }
-  .sent {
-    background: wheat;
+}.btnbutton{
+  width: 20%;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5%;
+  color: white;
+  font-size: 12px;
+  background-color: rgb(192 208 252);
+}.userside{
+
+    width: 16%;
+    background-color:rgb(192 208 252);
     color: black;
-    align-self: flex-end;
-  }
-  .received {
-    background: #f8f2e9;
-    color: black;
-    align-self: flex-start;
-  }.rowchat{
-      display: flex ;
-          flex-direction: row;
-          flex-wrap: wrap;
-          background-color:  rgb(245, 213, 154);
-          padding:2%;
-          border-radius: 15px;
-  }.row-textbtn{
-      display: flex;
-      flex-direction: row;
-      
-  }.btnbutton{
-      width: 20%;
-      margin-left: 10px;
-      border: none;
-      border-radius: 5%;
-      color: black;
-      background-color: rgb(192, 252, 214);
-  }.userside{
-  
-      width: 16%;
-      background-color: rgb(192, 252, 214);
-      color: black;
-      border-radius: 20px 0 0 20px;
-      padding: 2%;
-  }.chatflex{
-      display: flex
-      ;
-          flex-direction: row;
-  }
-  
+    border-radius: 20px 0 0 20px;
+    padding: 2%;
+}.chatflex{
+    display: flex
+    ;
+        flex-direction: row;
+}

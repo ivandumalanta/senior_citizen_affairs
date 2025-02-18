@@ -146,11 +146,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validate file type and size
             if (in_array($file_type, $allowed_types) && $file_size <= 500000000) {
                 $unique_file_name = uniqid('doc_') . '.' . pathinfo($file_name, PATHINFO_EXTENSION);
-                $full_file_path = $osca_folder . $unique_file_name;
+                $full_file_path_doc = $osca_folder . $unique_file_name;
     
                 // Move the file to the osca_id folder
-                if (move_uploaded_file($file_tmp_name, $full_file_path)) {
-                    $uploaded_files[] = $full_file_path; // Save the file path for database storage
+                if (move_uploaded_file($file_tmp_name, $full_file_path_doc)) {
+                    $uploaded_files[] = $full_file_path_doc; // Save the file path for database storage
                 } else {
                     echo "Error uploading file: " . $file_name;
                 }
@@ -207,9 +207,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':full_path_sig' => $full_file_path_sig,
             ':documents_path' => $documents_path_json
         ]);
+    
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 
-       
-        echo "Data inserted successfully!";
+            echo "<script>
+                setTimeout(function() {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'You successfully submitted your registration.',
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.href = 'index.php'; // Change this to your desired page
+                    });
+                }, 100);
+            </script>";
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
         echo "<pre>";

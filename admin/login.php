@@ -28,7 +28,7 @@ if (isset($_SESSION['loggedin']) &&  $_SESSION['loggedin'] == true) {
 
             <div class="row loginrow">
                 <div class="col-sm-6 logo-container ">
-                    <img src="https://www.oscaportal.com/logo/logo.png" alt="logo" class="logoimg">
+                    <img src="./assets/logo2.png" alt="logo" class="logoimg">
                     <p><b>Office of Senior Citizen Affairs <br> Malasiqui</b></p>
                 </div>
                 <div class="col-sm-6 login-form text-center">
@@ -39,7 +39,7 @@ if (isset($_SESSION['loggedin']) &&  $_SESSION['loggedin'] == true) {
                         <input type="password" id="password" name="password" class="passworddesign" placeholder="Password"><br><br>
                      
                         <button type="submit" class="spacingtop login-btn ">Login</button><br><br>
-                        <a href="forgotpass.php" class="font16">Forgot Password?</a> 
+                       
                         
                     </form>
                 </div>

@@ -34,10 +34,12 @@ $adminId =  2; // Default to 1 if no admin found
         <?php include '.././components/user-nav.php'; ?>
     </nav>
     <div class="main-content">
-        <h2><b>Chat Overview</b></h2>
+   
         <div class="container">
             <div class="row ">
+
                 <div class="chat-container">
+                <h2><b>Chat Overview</b></h2>
                     <h3>Chat with Admin</h3>
                     <div class="messages"></div>
                     <div class="row-textbtn">

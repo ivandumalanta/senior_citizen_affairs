@@ -12,7 +12,8 @@ while ($row = $result->fetch_assoc()) {
         'title' => $row['title'],
         'start' => $row['start'],
         'end' => $row['end'],
-        'request_type' => $row['request_type']
+        'request_type' => $row['request_type'],
+        'status' =>$row['status'],
     ];
 }
 

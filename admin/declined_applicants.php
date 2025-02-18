@@ -21,7 +21,7 @@ try {
     // Search and Pagination Query
     $sql = "SELECT osca_id, last_name, first_name, middle_name, suffix, sex
             FROM users
-            WHERE status = 'approved' AND (last_name LIKE :search OR first_name LIKE :search)
+            WHERE status = 'declined' AND (last_name LIKE :search OR first_name LIKE :search)
             ORDER BY created_at DESC
             LIMIT :startLimit, :recordsPerPage";
 
@@ -34,7 +34,7 @@ try {
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Get total records for pagination
-    $totalRecordsSql = "SELECT COUNT(*) FROM users WHERE status = 'approved' AND (last_name LIKE :search OR first_name LIKE :search)";
+    $totalRecordsSql = "SELECT COUNT(*) FROM users WHERE status = 'declined' AND (last_name LIKE :search OR first_name LIKE :search)";
     $totalRecordsStmt = $pdo->prepare($totalRecordsSql);
     $totalRecordsStmt->bindValue(':search', '%' . $searchQuery . '%', PDO::PARAM_STR);
     $totalRecordsStmt->execute();
@@ -68,7 +68,7 @@ try {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 formapplicants">
-                    <h1><b>Applicants</b></h1>
+                    <h1><b>Declined Applicants</b></h1>
                     <form method="GET" action="">
                         <div class="row searchflex">
                             <div class="col-sm-4">

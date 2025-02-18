@@ -51,7 +51,7 @@ if ($row) {
                 <div class="row" style="padding: 3%;" data-aos="fade-up">
                     <div class="col-sm-12 text-center">
                         <p class="font24">To register for Senior Citizen Affairs, applicants must be at least 60 years old and provide valid identification, proof of residency, and any necessary supporting documents. Registration grants access to various benefits, including healthcare assistance, social programs, financial aid, and community activities designed to enhance the well-being of senior citizens. Interested individuals or their representatives may visit the designated office or apply online, ensuring all required documents are submitted for verification. For further inquiries, please contact the Senior Citizen Affairs office.</p>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#registerModal">Register Now</button>
+                        <button type="button" class="btn reg btn-danger" data-toggle="modal" data-target="#registerModal">Register Now</button>
                     </div>
                 </div>
             </div>
@@ -73,13 +73,18 @@ if ($row) {
                                 <div id="step1">
                                     <label>Username:</label>
                                     <input type="text" name="username" class="form-control" required>
-                                    <label class="spacingtop">Password:</label>
-                                    <input type="password" name="password" class="form-control" required>
-                                    <button type="button" class="btn btn-danger next spacingtop">Next</button>
+                                    <label>Password:</label>
+                                    <input type="password" name="password" id="password" class="form-control" required>
+                                    <label>Confirm Password:</label>
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
+                                    <div id="passwordError" class="error-message"></div>
+     
+                                    <button type="button" class="btn btn-danger next next-first spacingtop">Next</button>
                                 </div>
                                 <div id="step2" style="display:none;">
                                     <label>Email:</label>
                                     <input type="email" name="email" class="form-control" required>
+                                    <span id="emailMessage"></span><br>
                                     <button type="button" class="btn btn-secondary prev spacingtop">Previous</button>
                                     <button type="button" class="btn btn-danger next spacingtop">Next</button>
                                 </div>
@@ -119,7 +124,7 @@ if ($row) {
                                                 <input type="text" id="middle_name" name="middle_name" class="form-control">
 
                                                 <label class="spacingtop">Suffix:</label><br>
-                                                <label><input type="radio" name="suffix" value=""> None</label>
+                                                <label><input type="radio" name="suffix" value="" required> None</label>
                                                 <label><input type="radio" name="suffix" value="JR"> JR</label>
                                                 <label><input type="radio" name="suffix" value="SR"> SR</label>
                                                 <label><input type="radio" name="suffix" value="I"> I</label>
@@ -137,7 +142,7 @@ if ($row) {
                                     <option>Inactive</option>
                                     <option>Passed Away</option>
                                 </select> -->
-                                                <label for="image" class="upload-icon">
+                                                <label for="image" class="upload-icon" >
                                                     <img id="preview-image" src="https://files.axshare.com/gsc/JK2WS3/7d/72/d7/7d72d709bc3b4c8cb808bfd8757274b5/images/register/u47.svg?pageId=c824c539-f06d-4c4c-aef8-7773a5e7e7fe" alt="Upload Icon">
                                                     <span>1x1 ID Picture</span>
                                                 </label>
@@ -151,7 +156,7 @@ if ($row) {
                                                 </select>
 
                                                 <label class="spacingtop">Sex:</label><br>
-                                                <label><input type="radio" name="sex" value="Male"> Male</label>
+                                                <label><input type="radio" name="sex" value="Male" required> Male</label>
                                                 <label><input type="radio" name="sex" value="Female"> Female</label>
                                                 <br>
                                                 <label class="spacingtop">Civil Status:</label>
@@ -159,7 +164,7 @@ if ($row) {
                                                     <option>Divorced</option>
                                                     <option>Married</option>
                                                     <option>Separated</option>
-                                                    <option>Single</option>
+                                                    <option>Single</option> 
                                                     <option>Widowed</option>
                                                 </select>
 
@@ -213,7 +218,7 @@ if ($row) {
                                                 <div class="birthday">
 
 
-                                                    <select name="birth_month" class="form-control">
+                                                    <select name="birth_month" class="form-control" required>
                                                         <option>Select Month</option>
                                                         <option>January</option>
                                                         <option>February</option>
@@ -229,7 +234,7 @@ if ($row) {
                                                         <option>December</option>
                                                     </select>
 
-                                                    <select name="birth_day" class="form-control">
+                                                    <select name="birth_day" class="form-control" required>
                                                         <option>Select Date</option>
                                                         <option>1</option>
                                                         <option>2</option>
@@ -264,16 +269,16 @@ if ($row) {
                                                         <option>31</option>
                                                     </select>
 
-                                                    <input type="text" name="birth_year" placeholder="Enter Year" class="form-control">
+                                                    <input type="text" name="birth_year" placeholder="Enter Year" class="form-control" required>
                                                 </div>
 
 
                                                 <label class="spacingtop">Address:</label>
-                                                <input type="text" name="address" class="form-control">
+                                                <input type="text" name="address" class="form-control" required>
 
 
                                                 <label class="spacingtop">Phone Number:</label>
-                                                <input type="number" name="phone_number" class="form-control">
+                                                <input type="number" name="phone_number" class="form-control" required>
                                             </div>
                                         </div>
 
@@ -315,8 +320,35 @@ if ($row) {
 </body>
 
 </html>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+        $(".reg").on("click", function () {
+                $(".next-first").prop("disabled", true);
+            });
+  $(document).ready(function () {
+    function validatePassword() {
+     
+        
+        let password = $('#password').val().trim();
+        let confirmPassword = $('#confirm_password').val().trim();
+        let button = $('.next-first');  
+
+        if (password === '' || confirmPassword === '' || password !== confirmPassword) {
+            $('#passwordError').text("Passwords do not match!");
+            button.prop('disabled', true);
+        } else {
+            $('#passwordError').text("");
+            button.prop('disabled', false);
+        }
+    }
+
+    $('#password, #confirm_password').on('keyup', validatePassword);
+});
+
+</script>
+<script>
+    
     $(document).ready(function() {
         $(".next").click(function() {
             $(this).parent().hide().next().show();
@@ -388,6 +420,42 @@ if ($row) {
             reader.readAsDataURL(file); // Convert the file into a data URL
         }
     });
+
+    $(document).ready(function () {
+    $("input[name='email']").on("keyup", function () {
+        let email = $(this).val();
+
+        if (email.length > 5) {
+            $.ajax({
+                url: "check_email.php", // Backend script
+                method: "POST",
+                data: { email: email },
+                success: function (response) {
+                    if (response == "taken") {
+                        $("input[name='email']").addClass("is-invalid");
+                        $("#emailMessage").remove();
+                        $("input[name='email']").after("<span id='emailMessage' class='text-danger'>Email is already in use!</span>");
+                        $(".next").prop("disabled", true);
+                    } else {
+                        $("input[name='email']").removeClass("is-invalid").addClass("is-valid");
+                        $("#emailMessage").remove();
+                        $("input[name='email']").after("<span id='emailMessage' class='text-success'>Email is available!</span>");
+                        $(".next").prop("disabled", false);
+                    }
+                }
+            });
+        } else {
+            $("#emailMessage").remove();
+            $("input[name='email']").after("<span id='emailMessage' class='text-danger'>Enter a valid email.</span>");
+            $(".next").prop("disabled", true);
+        }
+    });
+
+    $(".reg").on("click", function () {
+        $(".next").prop("disabled", true);
+    });
+});
+
 </script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

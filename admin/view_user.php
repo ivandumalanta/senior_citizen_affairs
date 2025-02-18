@@ -34,19 +34,66 @@ try {
 
     $documents = $stmtDocs->fetchAll(PDO::FETCH_ASSOC);
 
-    // Check if "Approve" button was clicked
-    if (isset($_POST['approve'])) {
-        // Update the user's status to "approved"
-        $updateSql = "UPDATE users SET status = 'approved' WHERE osca_id = :id";
-        $updateStmt = $pdo->prepare($updateSql);
-        $updateStmt->bindValue(':id', $id, PDO::PARAM_STR);
-        $updateStmt->execute();
+ // Handle approve action
+ if (isset($_POST['approve'])) {
+    $updateSql = "UPDATE users SET status = 'approved' WHERE osca_id = :id";
+    $updateStmt = $pdo->prepare($updateSql);
+    $updateStmt->bindValue(':id', $id, PDO::PARAM_STR);
+    
+    echo $updateStmt->execute() ? "success" : "error";
+    exit;
+}
 
-        // Redirect to the same page to reflect the change
-        header("Location: " . $_SERVER['PHP_SELF'] . "?id=" . $id);
-        exit;
+// Handle decline action
+if (isset($_POST['decline'])) {
+    $updateSql = "UPDATE users SET status = 'declined' WHERE osca_id = :id";
+    $updateStmt = $pdo->prepare($updateSql);
+    $updateStmt->bindValue(':id', $id, PDO::PARAM_STR);
+    
+    echo $updateStmt->execute() ? "success" : "error";
+    exit;
+}
+
+    
+    // Handle update user data
+   
+if (isset($_POST['update'])) {
+    $firstName = $_POST['first_name'];
+    $lastName = $_POST['last_name'];
+    $middleName = $_POST['middle_name'];
+    $suffix = $_POST['suffix'];
+    $sex = $_POST['sex'];
+    $birthDate = $_POST['birth_date'];
+    $address = $_POST['address'];
+    $phoneNumber = $_POST['phone_number'];
+    $memberStatus = $_POST['member_status'];
+
+    // Update the user details
+    $updateUserSql = "UPDATE users SET first_name = :first_name, last_name = :last_name, middle_name = :middle_name, suffix = :suffix, sex = :sex, birth_day = :birth_date, address = :address, phone_number = :phone_number, member_status = :member_status WHERE osca_id = :id";
+    $updateStmt = $pdo->prepare($updateUserSql);
+    $updateStmt->bindValue(':first_name', $firstName, PDO::PARAM_STR);
+    $updateStmt->bindValue(':last_name', $lastName, PDO::PARAM_STR);
+    $updateStmt->bindValue(':middle_name', $middleName, PDO::PARAM_STR);
+    $updateStmt->bindValue(':suffix', $suffix, PDO::PARAM_STR);
+    $updateStmt->bindValue(':sex', $sex, PDO::PARAM_STR);
+    $updateStmt->bindValue(':birth_date', $birthDate, PDO::PARAM_STR);
+    $updateStmt->bindValue(':address', $address, PDO::PARAM_STR);
+    $updateStmt->bindValue(':phone_number', $phoneNumber, PDO::PARAM_STR);
+    $updateStmt->bindValue(':member_status', $memberStatus, PDO::PARAM_STR);
+    $updateStmt->bindValue(':id', $id, PDO::PARAM_STR);
+
+    if ($updateStmt->execute()) {
+        echo "<script>alert('User data updated successfully!');</script>";
+    } else {
+        echo "<script>alert('Failed to update user data.');</script>";
     }
+
+    // Reload the page to reflect changes
+    header("Location: " . $_SERVER['PHP_SELF'] . "?id=" . $id);
+    exit;
+}
 } catch (PDOException $e) {
+    echo "<script>alert('Database connection failed: " . $e->getMessage() . "');</script>";
     die("Database connection failed: " . $e->getMessage());
 }
 ?>
@@ -74,9 +121,99 @@ try {
 
         <a href="applicants.php" class="btn btn-danger">Back to List</a>
         <h1><b>View User Details</b></h1>
+        <?php if ($user['status'] == 'pending'): ?>
+        <form id="actionForm" method="POST">
+            <button type="button" id="approveBtn" class="btn btn-primary">Approve</button>
+            <button type="button" id="declineBtn" class="btn btn-danger">Decline</button>
+            <input type="hidden" name="action" id="actionInput" value="">
+        </form>
+    <?php else: ?>
+        <p class="text-info">User status: <?php echo htmlspecialchars($user['status']); ?></p>
+    <?php endif; ?>
+                        <br>
+                        <br>
+         
         <div class="container-fluid">
-            <div class="row"> 
-                <div class="col-sm-12 formapplicants" style="font-size: 20px;">
+      
+
+<div class="container-fluid">
+    <div class="row formuser">
+        
+    </div>
+</div>
+</div>
+
+<!-- Modal for Editing User Details -->
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit User Details</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="">
+                    <div class="form-group">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" class="form-control" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" class="form-control" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="middle_name">Middle Name:</label>
+                        <input type="text" class="form-control" name="middle_name" value="<?php echo htmlspecialchars($user['middle_name']); ?>">
+                    </div>
+                    <div class="form-group">
+                    <label for="last_name">Suffix:</label>
+        <select class="form-control" name="suffix">
+            <option value="" <?php echo ($user['suffix'] == '') ? 'selected' : ''; ?>>None</option>
+            <option value="Jr." <?php echo ($user['suffix'] == 'Jr.') ? 'selected' : ''; ?>>Jr.</option>
+            <option value="Sr." <?php echo ($user['suffix'] == 'Sr.') ? 'selected' : ''; ?>>Sr.</option>
+            <option value="II" <?php echo ($user['suffix'] == 'II') ? 'selected' : ''; ?>>II</option>
+            <option value="III" <?php echo ($user['suffix'] == 'III') ? 'selected' : ''; ?>>III</option>
+            <option value="IV" <?php echo ($user['suffix'] == 'IV') ? 'selected' : ''; ?>>IV</option>
+        </select>
+    
+</div>
+
+                    <div class="form-group">
+                        <label for="sex">Gender</label>
+                        <select class="form-control" name="sex" required>
+                            <option value="Male" <?php echo ($user['sex'] === 'Male') ? 'selected' : ''; ?>>Male</option>
+                            <option value="Female" <?php echo ($user['sex'] === 'Female') ? 'selected' : ''; ?>>Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="birth_date">Birth Date:</label>
+                        <input type="date" class="form-control" name="birth_date" value="<?php echo htmlspecialchars($user['birth_day']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number:</label>
+                        <input type="text" class="form-control" name="phone_number" value="<?php echo htmlspecialchars($user['phone_number']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="member_status">Member Status:</label>
+                        <select class="form-control" name="member_status" required>
+                            <option value="active" <?php echo ($user['member_status'] == 'active') ? 'selected' : ''; ?>>Active</option>
+                            <option value="inactive" <?php echo ($user['member_status'] == 'inactive') ? 'selected' : ''; ?>>Inactive</option>
+                            <option value="passed away" <?php echo ($user['member_status'] == 'passed away') ? 'selected' : ''; ?>>Passed Away</option>
+                        </select>
+                    </div>
+                    <button type="submit" name="update" class="btn btn-success">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <div class="row formuser">
+                <div class="col-sm-8 formapplicants" style="font-size: 20px;">
 
 
                     <form class="form spacingtop20 ">
@@ -157,57 +294,105 @@ try {
                                 <p class="form-control-static"><?php echo htmlspecialchars($user['status']); ?></p>
                             </div>
                         </div>
+                        
                     </form>
 
 
-            </div>
-
-
-        </div>
-        <div class="row">
-            <h2>User Documents</h2>
-            <div class="col-sm-12 formapplicants ">
-                <div class="documents spacingtop20">
-                    <?php if ($documents): ?>
-                        <?php foreach ($documents as $doc): ?>
-                            <img src=".././<?php echo htmlspecialchars($doc['signature_id']); ?>" alt="Signature" class="img-thumbnail" width="200" height="200">
-
-                            <?php
-                            // Decode the JSON data for documents_path
-                            $documentPaths = json_decode($doc['documents_path'], true);
-                            if (is_array($documentPaths)):
-                            ?>
-                                <div class="document-images">
-                                    <?php foreach ($documentPaths as $path): ?>
-                                        <img src=".././<?php echo htmlspecialchars($path); ?>" alt="Document Image" class="img-thumbnail" width="200" height="200">
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p class="text-warning">No documents found for this user.</p>
-                    <?php endif; ?>
                 </div>
-                <br>
+                <div class="col-sm-4 text-center">
+                    <div class="formapplicants ">
+                        <h2>User Documents</h2>
+                        <div class="documents spacingtop20">
+                            <?php if ($documents): ?>
+                                <?php foreach ($documents as $doc): ?>
+                                    <div class="image-container">
+                                        <img src=".././<?php echo htmlspecialchars($doc['signature_id']); ?>" alt="Signature" class="img-thumbnail" width="200" height="200">
+                                        <br>
+                                        <a href=".././<?php echo htmlspecialchars($doc['signature_id']); ?>" target="_blank" class="btn btn-danger btn-sm mt-2">View Image</a>
+                              
+                                    </div>
+                                            <?php
+                                    // Decode the JSON data for documents_path
+                                    $documentPaths = json_decode($doc['documents_path'], true);
+                                    if (is_array($documentPaths)):
+                                    ?>
+                                        <div class="document-images spacingtop20">
+                                            <?php foreach ($documentPaths as $path): ?>
+                                                <div class="image-container">
+                                                    <img src=".././<?php echo htmlspecialchars($path); ?>" alt="Document Image" class="img-thumbnail" width="200" height="200">
+                                                    <br>
+                                                    <a href=".././<?php echo htmlspecialchars($path); ?>" target="_blank" class="btn btn-danger btn-sm mt-2">View Image</a>
+                                                    
+                                                </div>
+                                                <br>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p class="text-warning">No documents found for this user.</p>
+                            <?php endif; ?>
 
-                <!-- Approve Button Form -->
-                <?php if ($user['status'] != 'approved'): ?>
-                    <form method="POST" action="" class="form-inline">
-                        <button type="submit" name="approve" class="btn btn-success">Approve</button>
-                    </form>
-                <?php else: ?>
-                    <p class="text-success">User is already approved.</p>
-                <?php endif; ?>
-                <br>
+                        </div>
+                        <br>
+
+                        <!-- Approve Button Form -->
+                        
+                    </div>
+                </div>
+
+
+
             </div>
-        </div>
 
-    </div>
+
+        </div>
 
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.getElementById("approveBtn").addEventListener("click", function() {
+            confirmAction("approve", "Approve", "Are you sure you want to approve this user?");
+        });
+
+        document.getElementById("declineBtn").addEventListener("click", function() {
+            confirmAction("decline", "Decline", "Are you sure you want to decline this user?");
+        });
+
+        function confirmAction(action, title, message) {
+            Swal.fire({
+                title: title,
+                text: message,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, " + action + " it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("actionInput").name = action;
+                    fetch("", {
+                        method: "POST",
+                        body: new FormData(document.getElementById("actionForm"))
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data.trim() === "success") {
+                            Swal.fire("Success!", "User has been " + action + "d.", "success").then(() => {
+                                window.location.href = "applicants.php";
+                            });
+                        } else {
+                            Swal.fire("Error!", "Something went wrong. Please try again.", "error");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 </body>
 
-</html> 
+</html>

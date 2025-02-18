@@ -17,10 +17,13 @@ body {
  
   padding:2%;
   padding-left: 8%;
+}.logoposition{
+width: 30%;
+margin: 0 auto;
 }
 
 .sidebar {
-  background-color:red;
+  background-color:blue;
   color: white;
   min-width: 250px;
   max-width: 250px;
@@ -35,7 +38,7 @@ body {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
- margin-bottom: 40%; /* Ensures space below the p element */
+ margin-bottom: 15%; /* Ensures space below the p element */
 }
 
 .sidebar ul {
@@ -52,6 +55,10 @@ body {
 
 .sidebar ul li {
   margin: 0;
+}
+.nav ul li.active{
+  background-color: white;
+  color: rgb(7, 148, 130);
 }
 
 .sidebar ul li a {
@@ -94,7 +101,7 @@ body {
   width: 185px;
   height: 104px;
   background: inherit;
-  background-color: rgba(245, 154, 35, 1);
+  background-color:  blue;
   border-radius: 5px;
   filter: drop-shadow(5px 5px 2.5px rgba(0, 0, 0, 0.34901960784313724));
   color: white;
@@ -168,7 +175,7 @@ body {
 .table-responsive{
 margin-top: 50px !important;
 }.formapplicants{
-background-color: rgb(250, 196, 124);
+background-color: rgb(220, 237, 243);
 display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -176,9 +183,13 @@ display: flex;
     justify-content: center;
     align-items: stretch;
     border-radius: 5px;
+    height: 100%;
     filter: drop-shadow(5px 5px 2.5px rgba(0, 0, 0, 0.34901960784313724));
-}.rowtable{
-background-color: wheat;
+    
+}
+.rowtable{
+background-color: blue;
+color: white;
 }
 
 /* view user */
@@ -189,7 +200,7 @@ background-color: wheat;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }.throwtable{
 background-color: wheat;
@@ -202,3 +213,14 @@ background-color: whitesmoke;
 .font20{
 font-size: 20px;
 }
+/* view user */
+.formuser{
+  display: flex
+  ;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+}
+
+

@@ -25,7 +25,7 @@ if (isset($_SESSION['osca_id'])) {
 
             <div class="row loginrow">
                 <div class="col-sm-6 logo-container ">
-                    <img src="https://www.oscaportal.com/logo/logo.png" alt="logo" class="logoimg">
+                    <img src="../admin/assets/logo2.png" alt="logo" class="logoimg">
                     <p><b>Office of Senior Citizen Affairs <br> Malasiqui</b></p>
                 </div>
                 <div class="col-sm-6 login-form text-center">

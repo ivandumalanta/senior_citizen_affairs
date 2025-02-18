@@ -57,7 +57,41 @@
     color: white !important; /* Ensure event text is visible */
     border: none;
 }
-
+.main-container {
+              display: flex;
+              width: 100%;
+          }
+          .calendar-container {
+              flex: 3;
+              padding: 20px;
+          }
+  
+          .appointment-list {
+              flex: 1;
+              padding: 20px;
+              background: #f8f9fa;
+              border-left: 1px solid #ddd;
+              overflow-y: auto;
+          }
+  
+          .appointment-item {
+              padding: 10px;
+              border-bottom: 1px solid #ddd;
+              background-color: #F6F4EB;
+              border-radius: 5px;
+              text-align: start;
+          }
+          .status {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 8px;
+          }
+          .status span{
+            background-color: #9BE8D8;
+            padding: 3px 10px 3px  10px;
+            border-radius: 20px;
+        
+          }
     </style>
 </head>
 
@@ -69,9 +103,20 @@
         <h2><b>Make an Appointment</b></h2>
 
 
-    <div id='calendar'></div>
+    <div class="main-container">
+              <div class="calendar-container">
+                  <div id='calendar'></div>
+              </div>
+              <div class="appointment-list">
+                  <h4><strong>Schedules</strong></h4>
+
+                  <hr>
+                  <div id="appointmentItems"></div>
+              </div>
+          </div>
     <div class="modal fade" id="eventModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
+    
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Schedule an Appointment</h5>
@@ -144,6 +189,12 @@ $(document).ready(function () {
             }
 
             $('#eventModal').modal('show');
+            $('#eventForm').off('keypress').on('keypress', function (e) {
+                if (e.which === 13) {  // Enter key code
+                    e.preventDefault();
+                    $('#saveEvent').click(); // Trigger save button click
+                }
+            });
 
             $('#saveEvent').off('click').on('click', function () {
                 var title = $('#eventTitle').val();
@@ -163,7 +214,8 @@ $(document).ready(function () {
                             title: title,
                             start: formattedStart,
                             end: formattedEnd,
-                            request_type: requestType
+                            request_type: requestType,
+                            
                         },
                         success: function () {
                             displayMessage("Added Successfully");
@@ -186,9 +238,32 @@ $(document).ready(function () {
                     success: function () {
                         $('#calendar').fullCalendar('removeEvents', event.id);
                         displayMessage("Deleted Successfully");
+                        $('#eventModal').modal('hide');
+                        $.ajax({
+                    url: "fetch-event.php", // Make sure this URL is correct
+                    type: "GET",
+                    success: function (data) {
+                        $("#appointmentItems").html('');
+                    },
+                    error: function () {
+                        console.log("Error loading appointments.");
                     }
+                    });
+                        
+                    }
+                    
                 });
             }
+        },
+        eventRender: function (event, element) {
+            $('#appointmentItems').append(
+                `<div class="appointment-item">
+                    <div class="status"> <span>${event.status}</span></div>
+                    
+                    <strong>${event.title}</strong><br>
+                    ${moment(event.start).format('MMMM Do YYYY, h:mm a')} - ${event.request_type}
+                </div>`
+            );
         }
     });
 });
